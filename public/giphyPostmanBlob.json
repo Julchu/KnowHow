@@ -1,0 +1,109 @@
+{
+  "info": {
+    "_postman_id": "f6f837c8-2736-4a02-96dd-447b5391816d",
+    "name": "Giphy",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Search",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "api.giphy.com/v1/gifs/search?api_key={{api_key}}&q=burrito",
+          "host": ["api", "giphy", "com"],
+          "path": ["v1", "gifs", "search"],
+          "query": [
+            {
+              "key": "api_key",
+              "value": "{{api_key}}"
+            },
+            {
+              "key": "q",
+              "value": "burrito"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Random",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "api.giphy.com/v1/gifs/random?api_key={{api_key}}&tag=burrito",
+          "host": ["api", "giphy", "com"],
+          "path": ["v1", "gifs", "random"],
+          "query": [
+            {
+              "key": "api_key",
+              "value": "{{api_key}}"
+            },
+            {
+              "key": "tag",
+              "value": "burrito"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Translate",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "api.giphy.com/v1/gifs/translate?api_key={{api_key}}&s=tasty%20burrito",
+          "host": ["api", "giphy", "com"],
+          "path": ["v1", "gifs", "translate"],
+          "query": [
+            {
+              "key": "api_key",
+              "value": "{{api_key}}"
+            },
+            {
+              "key": "s",
+              "value": "tasty%20burrito"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Trending",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "api.giphy.com/v1/gifs/trending?api_key={{api_key}}&limit=10&rating=g&offset=0",
+          "host": ["api", "giphy", "com"],
+          "path": ["v1", "gifs", "trending"],
+          "query": [
+            {
+              "key": "api_key",
+              "value": "{{api_key}}"
+            },
+            {
+              "key": "limit",
+              "value": "10"
+            },
+            {
+              "key": "rating",
+              "value": "g"
+            },
+            {
+              "key": "offset",
+              "value": "0"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
