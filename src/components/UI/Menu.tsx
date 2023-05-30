@@ -5,7 +5,6 @@ const { definePartsStyle, defineMultiStyleConfig } =
   createMultiStyleConfigHelpers(menuAnatomy.keys);
 
 const baseStyle = definePartsStyle({
-  button: {},
   list: {
     boxShadow: "normal",
   },
@@ -13,9 +12,6 @@ const baseStyle = definePartsStyle({
     _hover: { bg: "knowHowGreen" },
     bg: "none",
   },
-  groupTitle: {},
-  command: {},
-  divider: {},
 });
 
 const Menu = defineMultiStyleConfig({

@@ -4,19 +4,14 @@ import {
   Button,
   Container,
   IconButton,
-  Link,
   Menu,
   MenuButton,
-  MenuDivider,
+  MenuGroup,
   MenuItem,
-  MenuItemOption,
   MenuList,
-  MenuOptionGroup,
-  Stack,
-  useColorMode,
+  Show,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
-import { useDisclosure } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/router";
 
@@ -27,71 +22,58 @@ import { useRouter } from "next/router";
  */
 const Layout: FC<{ children: ReactNode }> = ({ children }) => {
   return (
-    <Container
-      maxW={"container.xl"}
-      p={{ base: "0px" }}
-      height={{ base: "100svh", sm: "100vh" }}
-      width={{ sm: "100vw" }}
-    >
-      <Header />
-      <>{children}</>
-    </Container>
+    <Box h={{ base: "100svh", sm: "100vh" }} w={{ sm: "100vw" }}>
+      <Container maxW={"container.xl"} p={{ base: "0px" }} h={"100%"}>
+        <Header />
+        {children}
+      </Container>
+    </Box>
   );
 };
 
 const Header: FC = () => {
-  const { colorMode, setColorMode } = useColorMode();
   const { asPath } = useRouter();
   return (
-    <Box display={{ base: "flex", sm: "block" }} float={{ sm: "right" }}>
-      <Menu>
-        <MenuButton
-          as={IconButton}
-          aria-label="Open Menu"
-          icon={<HamburgerIcon />}
-          variant="outline"
-        />
-        <MenuList>
-          <MenuOptionGroup
-            title="Color mode"
-            type="radio"
-            onChange={(e) => {
-              setColorMode(e as "light" | "dark");
-            }}
-          >
-            <MenuItemOption
-              closeOnSelect={false}
-              value={"light"}
-              bg={colorMode === "light" ? "knowHowGreen" : ""}
-            >
-              Light
-            </MenuItemOption>
-            <MenuItemOption
-              closeOnSelect={false}
-              value={"dark"}
-              bg={colorMode === "dark" ? "knowHowGreen" : ""}
-            >
-              Dark
-            </MenuItemOption>
-          </MenuOptionGroup>
+    <Box display={{ base: "flex", sm: "block" }} float={"right"}>
+      {/* Desktop button layout */}
+      <Show above={"sm"}>
+        <Button as={NextLink} href={"/"}>
+          Search
+        </Button>
+        <Button as={NextLink} href={"bookmarks"}>
+          Bookmarks
+        </Button>
+      </Show>
 
-          <MenuDivider />
-          <MenuItem
-            as={NextLink}
-            href={"/"}
-            bg={asPath === "/" ? "knowHowGreen" : ""}
-          >
-            Search
-          </MenuItem>
-          <MenuItem
-            as={NextLink}
-            href={"bookmarks"}
-            bg={asPath === "/bookmarks" ? "knowHowGreen" : ""}
-          >
-            Bookmarks
-          </MenuItem>
-        </MenuList>
-      </Menu>
+      {/* Mobile hamburger menu */}
+      <Show below={"sm"}>
+        <Menu>
+          <MenuButton
+            as={IconButton}
+            aria-label="Open Menu"
+            icon={<HamburgerIcon />}
+            variant="outline"
+          />
+          <MenuList>
+            <MenuGroup title="Links">
+              <MenuItem
+                as={NextLink}
+                href={"/"}
+                bg={asPath === "/" ? "knowHowGreen" : ""}
+              >
+                Search
+              </MenuItem>
+              <MenuItem
+                as={NextLink}
+                href={"bookmarks"}
+                bg={asPath === "/bookmarks" ? "knowHowGreen" : ""}
+              >
+                Bookmarks
+              </MenuItem>
+            </MenuGroup>
+          </MenuList>
+        </Menu>
+      </Show>
     </Box>
   );
 };
