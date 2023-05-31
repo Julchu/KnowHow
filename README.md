@@ -3,7 +3,8 @@ for [`KnowHow's React Technical Challenge (GIPHY)`](https://docs.google.com/docu
 
 ## Getting Started
 
-* First, pull the repo into an empty directory, fill in your `GIPHY` base URL and API key
+* First, pull the repo into an empty directory, fill in your `GIPHY` base URL and API key into your .env file (I
+  personally used .env.local)
 
 ```
 Example base URL might look like this: api.giphy.com/v1/gifs
