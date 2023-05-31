@@ -7,7 +7,7 @@ export default function Document() {
       <Head />
       <body>
         {/* Color mode script is used for choosing light/dark mode */}
-        <ColorModeScript initialColorMode={"dark"} />
+        <ColorModeScript initialColorMode={"light"} />
         <Main />
         <NextScript />
       </body>

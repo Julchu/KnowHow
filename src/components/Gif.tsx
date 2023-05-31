@@ -2,6 +2,7 @@ import { FC, ReactNode } from "react";
 import { GifObject } from "@/hooks/useBookmarks";
 import { Box, Flex, Image, Skeleton, Text } from "@chakra-ui/react";
 
+/* Each item should have preview_gif URL, title, and username */
 const Gif: FC<{
   image: GifObject;
   icon: ReactNode;

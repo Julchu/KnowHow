@@ -1,7 +1,6 @@
 import { FC, useCallback } from "react";
 import {
   AbsoluteCenter,
-  Button,
   Heading,
   IconButton,
   Wrap,
@@ -21,7 +20,7 @@ const BookmarkResults: FC = () => {
     [removeGif]
   );
 
-  if (currentBookmarks.length === 0)
+  if (!currentBookmarks.length)
     return (
       <AbsoluteCenter>
         <Heading>No bookmarks</Heading>
@@ -34,7 +33,6 @@ const BookmarkResults: FC = () => {
         ? currentBookmarks.map((image, index) => {
             return (
               <WrapItem key={`gifItem_${index}`}>
-                {/* Each item might not have a preview_webp URL, but should have preview_gif URL */}
                 <Gif
                   image={image}
                   icon={

@@ -30,10 +30,6 @@ const useBookmarkHook = (): [BookmarkMethods, GifObject[]] => {
     }
   }, []);
 
-  // useEffect(() => {
-  //   console.log(currentBookmarks);
-  // }, [currentBookmarks]);
-
   // Pulls data from localStorage as source of truth; updates currentBookmarks state
   const getGifs = useCallback<BookmarkMethods["getGifs"]>(() => {
     const bookmarks = localStorage.getItem("bookmarkedGifs");
@@ -71,9 +67,10 @@ const useBookmarkHook = (): [BookmarkMethods, GifObject[]] => {
 
   // For testing purposes; clear all gifs from localStorage
   const clearGifs = useCallback<BookmarkMethods["clearGifs"]>(() => {
-    localStorage.clear();
+    setCurrentBookmarks(getGifs());
     setCurrentBookmarks([]);
-  }, []);
+    localStorage.clear();
+  }, [getGifs]);
 
   return [{ getGifs, saveGif, removeGif, clearGifs }, currentBookmarks];
 };
