@@ -32,12 +32,22 @@ const Header: FC = () => {
 };
 
 const DesktopMenu: FC = () => {
+  const { asPath } = useRouter();
   return (
     <Flex h={"headerHeight"} m={"headerPadding"}>
-      <Button as={NextLink} href={"/"}>
+      <Button
+        as={NextLink}
+        href={"/"}
+        bg={asPath === "/" ? "knowHowGreen" : ""}
+      >
         Search
       </Button>
-      <Button as={NextLink} href={"bookmarks"} ml={"headerPadding"}>
+      <Button
+        as={NextLink}
+        href={"bookmarks"}
+        ml={"headerPadding"}
+        bg={asPath === "/bookmarks" ? "knowHowGreen" : ""}
+      >
         Bookmarks
       </Button>
     </Flex>

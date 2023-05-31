@@ -9,8 +9,8 @@ import Header from "@/components/Header";
  */
 const Layout: FC<{ children: ReactNode }> = ({ children }) => {
   return (
-    <Box h={{ base: "100svh", sm: "100vh" }} w={{ sm: "100vw" }}>
-      <Container maxW={"container.xl"} p={"0px"} h={"100%"}>
+    <Box h={{ base: "100svh", sm: "100vh" }}>
+      <Container maxW={"container.xl"} p={"0px"}>
         <Header />
         {children}
       </Container>
