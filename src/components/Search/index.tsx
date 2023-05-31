@@ -8,10 +8,8 @@ export const SearchComponent: FC<{ apiInfo: ApiInfo }> = ({ apiInfo }) => {
   // Debounced controlled search input, to prevent search from spamming whenever input is changed
   const [searchInput, setSearchInput] = useState<string>("");
   const debouncedSearch = useDebouncedState(searchInput, 1000);
-  // const debouncedSearch = useDebouncedState(searchInput, 1000);
 
   return (
-    // Absolute center Chakra component centers content vertically and horizontally with absolute positions
     <Box>
       <SearchHeader setSearchInput={setSearchInput} />
 

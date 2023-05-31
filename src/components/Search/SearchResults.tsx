@@ -18,7 +18,6 @@ const SearchResults: FC<{ searchInput: string; apiInfo: ApiInfo }> = ({
 }) => {
   /* Saving Gif to bookmarks */
   const [{ saveGif }] = useBookmarkHook();
-
   const onClickHandler = useCallback(
     (image: GifObject) => {
       saveGif(image);
@@ -42,13 +41,20 @@ const SearchResults: FC<{ searchInput: string; apiInfo: ApiInfo }> = ({
   if (error)
     return (
       <AbsoluteCenter>
-        <Heading>Error loading gifs</Heading>
+        <Heading>Error loading GIFs</Heading>
       </AbsoluteCenter>
     );
   if (isLoading)
     return (
       <AbsoluteCenter>
-        <Heading>Loading gifs</Heading>
+        <Heading>Loading GIFs</Heading>
+      </AbsoluteCenter>
+    );
+
+  if (!searchInput)
+    return (
+      <AbsoluteCenter>
+        <Heading>Search GIFs</Heading>
       </AbsoluteCenter>
     );
 
