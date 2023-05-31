@@ -5,43 +5,49 @@ export type GifObject = {
     preview_gif: {
       url: string;
     };
-    preview_webp: {
-      url: string;
-    };
   };
   title: string;
   id: string;
 };
 
 type BookmarkMethods = {
-  getGifs: () => unknown[];
+  getGifs: () => GifObject[];
   saveGif: (item: GifObject) => void;
   removeGif: (index: number) => void;
+  clearGifs: () => void;
 };
 
 const useBookmarkHook = (): BookmarkMethods => {
   const getGifs = useCallback<BookmarkMethods["getGifs"]>(() => {
-    const bookmarks = JSON.parse(localStorage.bookmarkedGifs);
-
-    console.log(bookmarks);
-
-    return bookmarks;
+    const bookmarks = localStorage.getItem("bookmarkedGifs");
+    // JSON.parse expects non-empty string to parse; if nothing to bookmark, return empty array
+    if (bookmarks) return JSON.parse(bookmarks);
+    return [];
   }, []);
 
   const saveGif = useCallback<BookmarkMethods["saveGif"]>(
     (item) => {
       const currentBookmarks = getGifs();
-      const bookmarks = JSON.stringify([currentBookmarks.push(item)]);
+      const bookmarks = JSON.stringify([...currentBookmarks, item]);
       localStorage.setItem("bookmarkedGifs", bookmarks);
     },
     [getGifs]
   );
 
-  const removeGif = useCallback<BookmarkMethods["removeGif"]>((index) => {
-    console.log(index);
+  const removeGif = useCallback<BookmarkMethods["removeGif"]>(
+    (index) => {
+      const currentBookmarks = getGifs();
+      const bookmarks = JSON.stringify([currentBookmarks.splice(index)]);
+      localStorage.setItem("bookmarkedGifs", bookmarks);
+    },
+    [getGifs]
+  );
+
+  const clearGifs = useCallback<BookmarkMethods["clearGifs"]>(() => {
+    localStorage.clear();
   }, []);
 
-  return { getGifs, saveGif, removeGif };
+  return { getGifs, saveGif, removeGif, clearGifs };
 };
 
 export default useBookmarkHook;
