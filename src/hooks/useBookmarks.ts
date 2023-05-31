@@ -67,10 +67,9 @@ const useBookmarkHook = (): [BookmarkMethods, GifObject[]] => {
 
   // For testing purposes; clear all gifs from localStorage
   const clearGifs = useCallback<BookmarkMethods["clearGifs"]>(() => {
-    setCurrentBookmarks(getGifs());
-    setCurrentBookmarks([]);
     localStorage.clear();
-  }, [getGifs]);
+    setCurrentBookmarks([]);
+  }, []);
 
   return [{ getGifs, saveGif, removeGif, clearGifs }, currentBookmarks];
 };

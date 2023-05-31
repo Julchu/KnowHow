@@ -1,4 +1,4 @@
-import { FC, useCallback } from "react";
+import { FC } from "react";
 import {
   AbsoluteCenter,
   Heading,
@@ -8,18 +8,12 @@ import {
 } from "@chakra-ui/react";
 import { DeleteIcon } from "@chakra-ui/icons";
 import Gif from "@/components/Gif";
-import useBookmarkHook from "@/hooks/useBookmarks";
+import { GifObject } from "@/hooks/useBookmarks";
 
-const BookmarkResults: FC = () => {
-  /* Saving Gif to bookmarks */
-  const [{ removeGif }, currentBookmarks] = useBookmarkHook();
-  const onClickHandler = useCallback(
-    (index: number) => {
-      removeGif(index);
-    },
-    [removeGif]
-  );
-
+const BookmarkResults: FC<{
+  onRemoveHandler: (index: number) => void;
+  currentBookmarks: GifObject[];
+}> = ({ onRemoveHandler, currentBookmarks }) => {
   if (!currentBookmarks.length)
     return (
       <AbsoluteCenter>
@@ -38,7 +32,7 @@ const BookmarkResults: FC = () => {
                   icon={
                     <DeleteButton
                       index={index}
-                      onClickHandler={onClickHandler}
+                      onClickHandler={onRemoveHandler}
                     />
                   }
                 />

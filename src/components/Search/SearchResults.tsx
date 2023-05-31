@@ -18,6 +18,7 @@ const SearchResults: FC<{ searchInput: string; apiInfo: ApiInfo }> = ({
 }) => {
   /* Saving Gif to bookmarks */
   const [{ saveGif }] = useBookmarkHook();
+
   const onClickHandler = useCallback(
     (image: GifObject) => {
       saveGif(image);
