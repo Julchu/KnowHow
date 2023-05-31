@@ -10,6 +10,16 @@ const SearchResults: FC<{ searchInput: string; apiInfo: ApiInfo }> = ({
   searchInput = "",
   apiInfo: { giphyUrl, giphyKey },
 }) => {
+  /* Saving Gif to bookmarks */
+  const [{ saveGif }] = useBookmarkHook();
+
+  const onClickHandler = useCallback(
+    (image: GifObject) => {
+      saveGif(image);
+    },
+    [saveGif]
+  );
+
   /** useSWR/fetcher allows typing when fetching data from API
    * Typing data as Gif.tsx[] allows us to expect data when mapping and rendering items in grid
    */
@@ -34,7 +44,12 @@ const SearchResults: FC<{ searchInput: string; apiInfo: ApiInfo }> = ({
             return (
               <WrapItem key={`gifItem_${index}`}>
                 {/* Each item might not have a preview_webp URL, but should have preview_gif URL */}
-                <Gif image={image} icon={<SaveButton image={image} />} />
+                <Gif
+                  image={image}
+                  icon={
+                    <SaveButton image={image} onClickHandler={onClickHandler} />
+                  }
+                />
               </WrapItem>
             );
           })
@@ -43,12 +58,10 @@ const SearchResults: FC<{ searchInput: string; apiInfo: ApiInfo }> = ({
   );
 };
 
-const SaveButton: FC<{ image: GifObject }> = ({ image }) => {
-  /* Saving Gif to bookmarks */
-  const { saveGif } = useBookmarkHook();
-  const onClickHandler = useCallback(() => {
-    saveGif(image);
-  }, [image, saveGif]);
+const SaveButton: FC<{
+  image: GifObject;
+  onClickHandler: (image: GifObject) => void;
+}> = ({ image, onClickHandler }) => {
   return (
     <IconButton
       bg={"white"}
@@ -58,7 +71,7 @@ const SaveButton: FC<{ image: GifObject }> = ({ image }) => {
       pos={"absolute"}
       top={"10px"}
       right={"10px"}
-      onClick={onClickHandler}
+      onClick={() => onClickHandler(image)}
     />
   );
 };

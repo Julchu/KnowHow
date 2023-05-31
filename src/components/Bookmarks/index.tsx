@@ -1,24 +1,39 @@
-import { FC, useCallback, useMemo } from "react";
+import { FC, useCallback } from "react";
 import useBookmarkHook from "@/hooks/useBookmarks";
-import { IconButton, Wrap, WrapItem } from "@chakra-ui/react";
+import { Button, IconButton, Text, Wrap, WrapItem } from "@chakra-ui/react";
 import Gif from "@/components/Gif";
 import { DeleteIcon } from "@chakra-ui/icons";
 
 const Bookmarks: FC = () => {
-  const { getGifs } = useBookmarkHook();
-  const bookmarks = useMemo(() => {
-    return getGifs();
-  }, [getGifs]);
+  /* Saving Gif to bookmarks */
+  const [{ clearGifs, removeGif }, currentBookmarks] = useBookmarkHook();
+  const onClickHandler = useCallback(
+    (index: number) => {
+      removeGif(index);
+    },
+    [removeGif]
+  );
+
+  if (currentBookmarks.length === 0) return <Text>No bookmarks</Text>;
 
   // Simple grid of images with max height of 160px per item, with auto widths (resized based on height of 160px)
   return (
     <Wrap p={"headerPadding"} spacing={"headerPadding"}>
-      {bookmarks
-        ? bookmarks.map((image, index) => {
+      <Button onClick={() => clearGifs()}>Clear</Button>
+      {currentBookmarks.length > 0
+        ? currentBookmarks.map((image, index) => {
             return (
               <WrapItem key={`gifItem_${index}`}>
                 {/* Each item might not have a preview_webp URL, but should have preview_gif URL */}
-                <Gif image={image} icon={<DeleteButton index={index} />} />
+                <Gif
+                  image={image}
+                  icon={
+                    <DeleteButton
+                      index={index}
+                      onClickHandler={onClickHandler}
+                    />
+                  }
+                />
               </WrapItem>
             );
           })
@@ -27,13 +42,10 @@ const Bookmarks: FC = () => {
   );
 };
 
-const DeleteButton: FC<{ index: number }> = ({ index }) => {
-  /* Saving Gif to bookmarks */
-  const { removeGif } = useBookmarkHook();
-  const onClickHandler = useCallback(() => {
-    removeGif(index);
-  }, [index, removeGif]);
-
+const DeleteButton: FC<{
+  index: number;
+  onClickHandler: (index: number) => void;
+}> = ({ index, onClickHandler }) => {
   return (
     <IconButton
       bg={"white"}
@@ -43,7 +55,7 @@ const DeleteButton: FC<{ index: number }> = ({ index }) => {
       pos={"absolute"}
       top={"10px"}
       right={"10px"}
-      onClick={onClickHandler}
+      onClick={() => onClickHandler(index)}
     />
   );
 };
