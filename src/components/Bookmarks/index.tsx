@@ -1,6 +1,14 @@
 import { FC, useCallback } from "react";
 import useBookmarkHook from "@/hooks/useBookmarks";
-import { Button, IconButton, Text, Wrap, WrapItem } from "@chakra-ui/react";
+import {
+  AbsoluteCenter,
+  Button,
+  Heading,
+  IconButton,
+  Text,
+  Wrap,
+  WrapItem,
+} from "@chakra-ui/react";
 import Gif from "@/components/Gif";
 import { DeleteIcon } from "@chakra-ui/icons";
 
@@ -14,7 +22,12 @@ const Bookmarks: FC = () => {
     [removeGif]
   );
 
-  if (currentBookmarks.length === 0) return <Text>No bookmarks</Text>;
+  if (currentBookmarks.length === 0)
+    return (
+      <AbsoluteCenter>
+        <Heading>No bookmarks</Heading>
+      </AbsoluteCenter>
+    );
 
   // Simple grid of images with max height of 160px per item, with auto widths (resized based on height of 160px)
   return (

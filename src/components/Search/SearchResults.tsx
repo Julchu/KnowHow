@@ -2,7 +2,13 @@ import { FC, useCallback } from "react";
 import { ApiInfo } from "@/pages";
 import useBookmarkHook, { GifObject } from "@/hooks/useBookmarks";
 import useSWR, { Fetcher } from "swr";
-import { AbsoluteCenter, IconButton, Wrap, WrapItem } from "@chakra-ui/react";
+import {
+  AbsoluteCenter,
+  Heading,
+  IconButton,
+  Wrap,
+  WrapItem,
+} from "@chakra-ui/react";
 import Gif from "@/components/Gif";
 import { AddIcon } from "@chakra-ui/icons";
 
@@ -33,8 +39,18 @@ const SearchResults: FC<{ searchInput: string; apiInfo: ApiInfo }> = ({
     fetcher
   );
 
-  if (error) return <AbsoluteCenter>Error loading gifs</AbsoluteCenter>;
-  if (isLoading) return <AbsoluteCenter>Loading gifs</AbsoluteCenter>;
+  if (error)
+    return (
+      <AbsoluteCenter>
+        <Heading>Error loading gifs</Heading>
+      </AbsoluteCenter>
+    );
+  if (isLoading)
+    return (
+      <AbsoluteCenter>
+        <Heading>Loading gifs</Heading>
+      </AbsoluteCenter>
+    );
 
   // Simple grid of images with max height of 160px per item, with auto widths (resized based on height of 160px)
   return (

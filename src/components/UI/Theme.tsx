@@ -52,8 +52,8 @@ const theme = {
   },
   config: {
     cssVarPrefix: "knowHow",
-    initialColorMode: "dark",
-    useSystemColorMode: true,
+    initialColorMode: "light",
+    useSystemColorMode: false,
   },
 };
 
