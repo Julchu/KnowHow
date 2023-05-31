@@ -1,6 +1,6 @@
-import { Text } from "@chakra-ui/react";
 import Head from "next/head";
 import Layout from "@/components/UI/Layout";
+import Bookmarks from "@/components/Bookmarks";
 
 const BookmarksPage = () => {
   return (
@@ -17,7 +17,7 @@ const BookmarksPage = () => {
       <main>
         <Layout>
           {/* Basic home screen with Search/Bookmarks nav button */}
-          <Text>Bookmarks</Text>
+          <Bookmarks />
         </Layout>
       </main>
     </>

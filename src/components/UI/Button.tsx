@@ -12,7 +12,6 @@ const Button = defineStyleConfig({
     _hover: { boxShadow: "hover" },
     _focus: { boxShadow: "focus" },
   },
-  sizes: {},
   variants: {
     navButton: {
       w: "160px",

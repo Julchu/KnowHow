@@ -1,9 +1,10 @@
-import { FC } from "react";
+import { FC, useCallback } from "react";
 import { ApiInfo } from "@/pages";
-import { GifObject } from "@/hooks/useBookmarks";
+import useBookmarkHook, { GifObject } from "@/hooks/useBookmarks";
 import useSWR, { Fetcher } from "swr";
-import { AbsoluteCenter, Wrap, WrapItem } from "@chakra-ui/react";
+import { AbsoluteCenter, IconButton, Wrap, WrapItem } from "@chakra-ui/react";
 import Gif from "@/components/Gif";
+import { AddIcon } from "@chakra-ui/icons";
 
 const SearchResults: FC<{ searchInput: string; apiInfo: ApiInfo }> = ({
   searchInput = "",
@@ -33,12 +34,32 @@ const SearchResults: FC<{ searchInput: string; apiInfo: ApiInfo }> = ({
             return (
               <WrapItem key={`gifItem_${index}`}>
                 {/* Each item might not have a preview_webp URL, but should have preview_gif URL */}
-                <Gif image={image} />
+                <Gif image={image} icon={<SaveButton image={image} />} />
               </WrapItem>
             );
           })
         : null}
     </Wrap>
+  );
+};
+
+const SaveButton: FC<{ image: GifObject }> = ({ image }) => {
+  /* Saving Gif to bookmarks */
+  const { saveGif } = useBookmarkHook();
+  const onClickHandler = useCallback(() => {
+    saveGif(image);
+  }, [image, saveGif]);
+  return (
+    <IconButton
+      bg={"white"}
+      aria-label="Save gif"
+      size="sm"
+      icon={<AddIcon />}
+      pos={"absolute"}
+      top={"10px"}
+      right={"10px"}
+      onClick={onClickHandler}
+    />
   );
 };
 
