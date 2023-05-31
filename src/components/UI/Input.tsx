@@ -29,8 +29,17 @@ const baseStyle = definePartsStyle({
   addon: {},
 });
 
+// Default variant with empty field needed to reset some extra default Input styles (such as blue outline border on focus)
+const defaultVariant = definePartsStyle({
+  field: {},
+});
+
 const Input = defineMultiStyleConfig({
   baseStyle,
+  variants: { defaultVariant },
+  defaultProps: {
+    variant: "defaultVariant",
+  },
 });
 
 export default Input;

@@ -39,6 +39,7 @@ const theme = {
   },
   space: {
     desktopPadding: "25px",
+    headerPadding: "20px",
   },
   /** Modifying default components;
    * Customizing components here will affect all components throughout app, putting high focus on reusibility
