@@ -12,16 +12,11 @@ const Button = defineStyleConfig({
     _hover: { boxShadow: "hover" },
     _focus: { boxShadow: "focus" },
   },
-  // Two sizes: sm and md
   sizes: {},
-  // Two variants: outline and solid
   variants: {
-    defaultVariant: {},
-  },
-  // The default size and variant values
-  defaultProps: {
-    // size: 'md',
-    variant: "defaultVariant",
+    navButton: {
+      w: "160px",
+    },
   },
 });
 

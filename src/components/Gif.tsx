@@ -1,17 +1,18 @@
 import { FC } from "react";
 import useBookmarkHook, { GifObject } from "@/hooks/useBookmarks";
-import { Box, IconButton, Image, Skeleton } from "@chakra-ui/react";
+import { Box, Flex, IconButton, Image, Skeleton, Text } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 
 const Gif: FC<{ image: GifObject }> = ({ image }) => {
   const {
     images: { preview_gif },
     title,
+    username,
   } = image;
 
   const { saveGif } = useBookmarkHook();
   return (
-    <Box pos={"relative"}>
+    <Flex pos={"relative"}>
       {/* Saving Gif to bookmarks */}
       <IconButton
         bg={"white"}
@@ -26,15 +27,20 @@ const Gif: FC<{ image: GifObject }> = ({ image }) => {
         }}
       />
 
-      <Image
-        src={preview_gif.url}
-        alt={title || "Gif"}
-        h={"160px"}
-        borderRadius={"5px"}
-        boxShadow={"normal"}
-        fallback={<Skeleton h={"160px"} w={"160px"} borderRadius={"5px"} />}
-      />
-    </Box>
+      <Box>
+        <Image
+          src={preview_gif.url}
+          alt={title || "Gif"}
+          boxSize={"160px"}
+          borderRadius={"5px"}
+          boxShadow={"normal"}
+          fallback={<Skeleton h={"160px"} w={"160px"} borderRadius={"5px"} />}
+        />
+
+        <Text maxWidth={"160px"}>{title}</Text>
+        <Text maxWidth={"160px"}>{username}</Text>
+      </Box>
+    </Flex>
   );
 };
 

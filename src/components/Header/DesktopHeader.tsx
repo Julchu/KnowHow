@@ -8,13 +8,13 @@ const DesktopMenu: FC = () => {
   return (
     <Flex h={"headerHeight"} m={"headerPadding"}>
       {asPath !== "/" ? (
-        <Button as={NextLink} href={"/"}>
+        <Button variant={"navButton"} as={NextLink} href={"/"}>
           Search
         </Button>
       ) : null}
 
       {asPath !== "/bookmarks" ? (
-        <Button as={NextLink} href={"bookmarks"}>
+        <Button variant={"navButton"} as={NextLink} href={"bookmarks"}>
           Bookmarks
         </Button>
       ) : null}
