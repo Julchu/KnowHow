@@ -7,6 +7,7 @@ export type GifObject = {
     };
   };
   title: string;
+  username: string;
   id: string;
 };
 
